@@ -114,7 +114,7 @@ Para que possamos entender nosso dataframe e sabermos quais colunas temos que aj
 
 dfCodiv19.count()
 
-"""Com estes dados podemos tirar algumas conlusões:
+"""Com estes dados podemos tirar algumas conclusões:
 - temos um total de 1.000 linhas em nosso dataset
 - Temos algumas colunas que não nos serão necessárias e que podemos elimina las, são elas:
   - city_ibge_code
@@ -123,7 +123,7 @@ dfCodiv19.count()
   - estimated_population_2019
   - is_last
   - order_for_place
-- deaths e city precisa ser analizada, pois como pudemos ver ela não contem a mesma quantidade de registros que o total do nosso dataset
+- deaths e city precisa ser analisada, pois como pudemos ver ela não contem a mesma quantidade de registros que o total do nosso dataset
 
 Vamos liminar as colunas desnecessárias
 """
@@ -134,18 +134,18 @@ dfCodiv19.pop('death_rate')
 dfCodiv19.pop('estimated_population_2019')
 dfCodiv19.pop('is_last')
 
-"""vamos agora analizar a coluna city que identificamos que, possui dados missing(sujeira ou dados faltantes) e vamos iniciar vendo os dados que estão nulos no dataset"""
+"""vamos agora analisar a coluna city que identificamos que, possui dados missing(sujeira ou dados faltantes) e vamos iniciar vendo os dados que estão nulos no dataset"""
 
 dfCodiv19[dfCodiv19['city'].isnull()]
 
-"""Com a análise acima podemos ver que os dados que estão com a coluna city nulos são os que mostram as valores de casos confirmados e moretes sumarizados por estado e como não vamos precisar destes dados,pois podemos calular os mesmo quando precisarmos.
+"""Com a análise acima podemos ver que os dados que estão com a coluna city nulos são os que mostram as valores de casos confirmados e mortes sumarizados por estado e como não vamos precisar destes dados,pois podemos calcular os mesmo quando precisarmos.
 
-Então vamos remover os  dados desnecesários.
+Então vamos remover os  dados desnecessários.
 """
 
 dfCodiv19 = dfCodiv19[dfCodiv19['city'].notnull()]
 
-"""Agora que removemos os dados missing da coluna city, precisamos dar uma analizada no conteudo da coluna para que possamos ter a certeza que os dados são validos."""
+"""Agora que removemos os dados missing da coluna city, precisamos dar uma analisada no conteúdo da coluna para que possamos ter a certeza que os dados são validos."""
 
 pd.unique(dfCodiv19[['city']].values.ravel('K'))
 
@@ -156,7 +156,7 @@ Então vamos agora analisar a coluna deaths
 
 dfCodiv19[dfCodiv19['deaths'].isnull()]
 
-"""Com esta anaise podemos ver que existem cidades que não tem mortes e possuem o valor da mesma ausente, então precisamos preencher as mesmas com 0"""
+"""Com esta analise podemos ver que existem cidades que não tem mortes e possuem o valor da mesma ausente, então precisamos preencher as mesmas com 0"""
 
 dfCodiv19 = dfCodiv19.fillna(0)
 
@@ -168,11 +168,11 @@ dfCodiv19.isna().sum()
 
 pd.unique(dfCodiv19[['place_type']].values.ravel('K'))
 
-"""Com isso confirmamos que só possuimos cidades e não temos a necessidade de termos mais esta coluna em nosso dataset, então vamos leiminala"""
+"""Com isso confirmamos que só possuímos cidades e não temos a necessidade de termos mais esta coluna em nosso dataset, então vamos eliminá-las"""
 
 dfCodiv19.pop('place_type')
 
-"""caom isso chegamos a conclusão que para nossa análise precisaremos apenas das colunas:
+"""Com isso chegamos a conclusão que para nossa análise precisaremos apenas das colunas:
 - **City:** que armazena a cidade que os dados representam
 - **State:** que armazena a informação da UF onde a cidade está
 - **Confirmed:** que armazena a quantidade de casos de COVID-19 confirmados na cidade/estado
@@ -192,7 +192,9 @@ dfCodiv19.head()
 
 dfCodiv19.to_csv('datasetCodiv19.csv', index=False,sep=';')
 
-"""**Autor:**
+"""Os scripts deste artigo estão em: https://github.com/AleTavares/pyAnaliseDadosAPI
+
+**Autor:**
 
 *Alexandre Tavares*
 
